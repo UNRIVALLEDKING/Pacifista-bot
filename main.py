@@ -67,9 +67,12 @@ def unknown_text(update: Update, context: CallbackContext):
 
 
 def generate_image(update: Update, context: CallbackContext):
-    image = openai.Image.create(
-        prompt=update["message"]["text"][16:], n=2, size="1024x1024")
-    update.message.reply_photo(image["data"][0]["url"])
+    if len(update["message"]["text"][16:]) > 0:
+        image = openai.Image.create(
+            prompt=update["message"]["text"][16:], n=2, size="1024x1024")
+        update.message.reply_photo(image["data"][0]["url"])
+    else:
+        update.message.reply_photo("https://i.ibb.co/Q6H1fzL/image.png")
 
 
 def response(update: Update, context: CallbackContext):
