@@ -16,8 +16,8 @@ bot = Updater(os.getenv("TG_BOT_TOKEN"),
               use_context=True)
 
 
-print(os.getenv("TG_BOT_TOKEN"))
-print(os.getenv("OPEN_AI_TOKEN"))
+# print(os.getenv("TG_BOT_TOKEN"))
+# print(os.getenv("OPEN_AI_TOKEN"))
 
 
 def start(update: Update, context: CallbackContext):
@@ -70,8 +70,7 @@ def generate_image(update: Update, context: CallbackContext):
     image = openai.Image.create(
         prompt=update["message"]["text"][16:], n=2, size="1024x1024")
     update.message.photo(
-        chat_id=update["message"]["message_id"], photo='https://telegram.org/img/t_logo.png')
-    print("generate", update)
+        chat_id=update["message"]["message_id"], photo=image)
 
 
 def response(update: Update, context: CallbackContext):
@@ -83,7 +82,7 @@ def response(update: Update, context: CallbackContext):
     )
     res = ResponseGenerate["choices"][0]["text"]
     update.message.reply_text(res)
-    print(context, update)
+    # print(context, update)
 
 
 bot.dispatcher.add_handler(CommandHandler('start', start))
