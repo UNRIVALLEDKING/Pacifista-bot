@@ -28,7 +28,7 @@ def start(update: Update, context: CallbackContext):
 
 def help(update: Update, context: CallbackContext):
     update.message.reply_text("""Available Commands :-
-    /generate_image - To generate Image
+    /generate_image {image you want}- to generate Image
 	/youtube - To get the youtube URL
 	/linkedin - To get the LinkedIn profile URL
 	/gmail - To get gmail URL
