@@ -70,8 +70,6 @@ def generate_image(update: Update, context: CallbackContext):
     image = openai.Image.create(
         prompt=update["message"]["text"][16:], n=2, size="1024x1024")
     update.message.reply_photo(image["data"][0]["url"])
-    print("chat id", update["message"]['chat']['id'])
-    print("image link", image["data"][0]["url"])
 
 
 def response(update: Update, context: CallbackContext):
