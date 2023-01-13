@@ -21,14 +21,17 @@ bot = Updater(os.getenv("TG_BOT_TOKEN"),
 
 
 def start(update: Update, context: CallbackContext):
+    first_name = update["message"]["chat"]["first_name"]
     update.message.reply_text(
-            "Hello UNRIVALLEDKING, Welcome to the Bot.Please write\
+            "Hello " + first_name + ", I'm Pacifista Bot. Please write\
 		/help to see the commands available.")
 
 
 def help(update: Update, context: CallbackContext):
     update.message.reply_text("""Available Commands :-
-    /generate_image {image you want}- to generate Image
+    /generate_image {image you want}
+    /telegram - to get my Telegram ID
+    /snapchat - to get my snapchat ID
 	/youtube - To get the youtube URL
 	/linkedin - To get the LinkedIn profile URL
 	/gmail - To get gmail URL
@@ -41,19 +44,30 @@ def gmail_url(update: Update, context: CallbackContext):
 
 
 def youtube_url(update: Update, context: CallbackContext):
-    update.message.reply_text("Youtube Link =>\
+    update.message.reply_text("Here is my Master's Youtube Link =>\
 	https://www.youtube.com/@unrivalledking")
 
 
 def linkedIn_url(update: Update, context: CallbackContext):
     update.message.reply_text(
-            "LinkedIn URL => \
+            "Here is my Master's LinkedIn URL => \
 		https://www.linkedin.com/in/unrivalledking/")
+
+
+def snapchat_id(update: Update, context: CallbackContext):
+    update.message.reply_text(
+            "Here is my Master's LinkedIn URL => \
+		https://www.snapchat.com/add/unrivalledking")
 
 
 def insta_url(update: Update, context: CallbackContext):
     update.message.reply_text(
-        "instagram URL => https://www.instagram.com/unrivalled___king")
+        "Here is my Master's instagram URL => https://www.instagram.com/unrivalled___king")
+
+
+def telegram_id(update: Update, context: CallbackContext):
+    update.message.reply_text(
+        "Here is my Master's Telegram ID => @UNRIVALLEDKING")
 
 
 def unknown(update: Update, context: CallbackContext):
@@ -84,7 +98,7 @@ def response(update: Update, context: CallbackContext):
     )
     res = ResponseGenerate["choices"][0]["text"]
     update.message.reply_text(res)
-    # print(context, update)
+    print(context, update)
 
 
 bot.dispatcher.add_handler(CommandHandler('start', start))
@@ -93,6 +107,8 @@ bot.dispatcher.add_handler(CommandHandler('help', help))
 bot.dispatcher.add_handler(CommandHandler('linkedin', linkedIn_url))
 bot.dispatcher.add_handler(CommandHandler('gmail', gmail_url))
 bot.dispatcher.add_handler(CommandHandler('instagram', insta_url))
+bot.dispatcher.add_handler(CommandHandler('telegram', telegram_id))
+bot.dispatcher.add_handler(CommandHandler('snapchat', snapchat_id))
 bot.dispatcher.add_handler(
     CommandHandler('generate_image', generate_image))
 bot.dispatcher.add_handler(MessageHandler(Filters.text, response))
